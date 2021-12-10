@@ -1,0 +1,22 @@
+InputField[Dynamic[input], String]
+
+counts := Counts[ToExpression/@StringSplit[input, ","]]
+
+f := counts[1] a^1 +
+     counts[2] a^2 +
+     counts[3] a^3 +
+     counts[4] a^4 +
+     counts[5] a^5
+
+step[s_] := Coefficient[s,a,1]a^0 +
+            Coefficient[s,a,2]a^1 +
+            Coefficient[s,a,3]a^2 +
+            Coefficient[s,a,4]a^3 +
+            Coefficient[s,a,5]a^4 +
+            Coefficient[s,a,6]a^5 +
+            (Coefficient[s,a,7]+Coefficient[s,a,0])a^6 +
+            Coefficient[s,a,8]a^7 +
+            Coefficient[s,a,0]a^8
+
+Total[CoefficientList[Nest[step, f, 80], a]]
+Total[CoefficientList[Nest[step, f, 256], a]]
